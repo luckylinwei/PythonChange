@@ -1,0 +1,15 @@
+# PythonChange
+Python程序变更抽取工具
+left_file.py和right_file.py为被比较的两个源文件
+intermediate_ast_build.py：利用ast模块生成两个文件对应的抽象语法树，设置节点的label和value；函数参数、返回值也作为节点处理，这样可以得到parameter_insert和return_value_insert等操作
+ast_information_process：设置节点id，获取节点集合、id_to_node、child_to_parent等树的相关信息
+ast_match：匹配两棵抽象语法树，返回节点匹配集合match_final
+editscript_calculate：根据节点匹配集合计算从T1转换为T2的编辑操作
+editscript_calculate_test：以子树为单位计算编辑操作
+editscript_changetype：分析编辑列表中的操作，得到每个变更操作对应的change type
+changetype_statistic：根据抽取结果计算changetype的分布
+file_process：对文件进行处理，包括自动获取指定目录下的同名文件进行比较，将结果输出到csv文件等
+change_type：枚举程序能处理的change_type
+ngrams.py：利用2-grams方法计算value字符串相似度
+change_extraction.py：调用上述各个文件，进行变更抽取，返回抽取的ChangeType分布情况
+main.py：工具运行主程序
